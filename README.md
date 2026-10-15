@@ -1,55 +1,66 @@
-# Mintlify Starter Kit
+# StudentPulse documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+Integration documentation built with Mintlify. Public pages are MDX files. Site navigation and links are in `docs.json`.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Preview and checks
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
-
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
+Run these commands from this directory:
 
 ```bash
-npx skills add https://mintlify.com/docs
+mint dev --no-open
+mint validate
+mint broken-links --check-anchors
 ```
 
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
+The preview is normally at http://localhost:3000. Use the URL printed by the CLI if the port is busy.
 
-See the [AI tools guides](/ai-tools) for tool-specific setup.
+## Source and scope
 
-## Development
+The initial content was converted on 15 October 2026 from [StudentPulse V1.5 Documentation — general version, November 2025](https://docs.google.com/document/d/1yJfvTaHZHtvBYVuulM3dlXCyJUEEo-BGluDScIg0kkw/edit).
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+Related work: [studentpulse/studentpulse.io#3321](https://github.com/studentpulse/studentpulse.io/issues/3321).
 
-```
-npm i -g mint
-```
+The migration includes:
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+- Integration overview and setup planning.
+- Check-in URL parameters, using synthetic identifiers.
+- Power BI/Fabric setup, export timing, data model, and all 48 dictionary fields.
+- The draft Check-in API, including create, get, delete, and distribution operations.
 
-```
-mint dev
-```
+The source's customer URLs and demo Check-in identifiers were replaced with generic examples. Missing source images were replaced with text and tables. The source's invalid response JSON and unescaped table delimiters were corrected.
 
-View your local preview at `http://localhost:3000`.
+Microsoft Teams bot and Microform webhook instructions were omitted from this site because issue #3321 calls for legacy content review. The source document still holds those instructions. This migration does not establish that all Teams integration paths are unavailable.
 
-## Publishing changes
+## Review before publication
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+The content has not been verified against the current application or a live integration. Draft notices are visible in the site. Do not remove them until the relevant checks are complete.
 
-## Need help?
+- [ ] Assign a technical owner for each topic and record its verification date.
+- [ ] Verify the current export settings path, connector credentials, and nightly export schedule.
+- [ ] Verify all field names, types, array serialization, and the answer-level row grain against a sample export.
+- [ ] Resolve the source formula `AVG(answer_value_0_100) / 10`; its input field is missing from the dictionary. Do not assume `Reply value` uses that scale.
+- [ ] Verify `source`, segmentation ID mapping, locale codes, option handling, and URL encoding with a test Check-in.
+- [ ] Confirm any additional exported identifier and its permitted use. Do not claim arbitrary URL parameters become export fields.
+- [ ] Verify the API base URL, authentication, and create/delete endpoints.
+- [ ] Resolve Get: `/checkin/:uuid` in the summary versus `/checkin/:id` in the detail.
+- [ ] Resolve distribution: `/checkin/distribute` in the summary versus `/checkin/reminder` in the detail.
+- [ ] Verify the API date format, replacement-variable JSON structure, required fields, nullability, errors, and retry rules.
+- [ ] Verify delete parameter placement and the effect on associated data.
+- [ ] Verify distribution recipients, delivery channels, and duplicate-send behavior.
+- [ ] Add verified Group integration content. It is absent from the supplied document.
+- [ ] Add verified UniLogin/Aula content. It is absent from the supplied document.
+- [ ] Confirm which Teams content is obsolete before any separate archive or removal work.
+- [ ] Add approved StudentPulse logo and favicon assets. Existing starter SVG assets remain unused.
+- [ ] Review the pages before sharing with TimeEdit.
 
-### Troubleshooting
+The Google document's internal revision label is not treated as an API version. `V1.5` follows the source product name; the source base URL uses `/v1/`.
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+## Editing
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+AI agents and developers can edit MDX files on a branch. Non-developers can use the Mintlify web editor. Each new public page needs a title, description, and navigation entry.
+
+The repository's `AGENTS.md` requests the Mintlify skill. It is installed locally in `.agents/skills/mintlify` for Codex.
+
+## Publication
+
+Pushing changes to the connected deployment branch triggers Mintlify publication. Keep unverified changes on a review branch. This generation task does not publish the site.

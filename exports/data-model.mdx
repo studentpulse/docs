@@ -1,0 +1,60 @@
+---
+title: "Export data model"
+description: "Understand the answer-level feed, its keys, and the relationships used in reports."
+---
+
+Each export row represents **one answer to one question**. It can also include the student's comment and action activity associated with that answer.
+
+## Keys and relationships
+
+| Field | Purpose |
+| --- | --- |
+| `Reply Question ID` | Identifies one answer row. |
+| `Reply ID` | Groups the answers from one Reply. |
+| `Question ID` | Links an answer to its question, options, and type. |
+| `Driver ID` | Identifies the question's Driver or theme. |
+| `Checkin ID` | Links the answer to a Check-in. |
+| `Parent checkin ID` | Identifies the parent Check-in, where applicable. |
+| `Organization ID` | Identifies the Organization for the Reply. |
+| `Parent organization ID` | Identifies its parent Organization. |
+| `Grandparent organization ID` | Identifies its grandparent Organization. |
+
+## Check-in and question context
+
+Check-in fields include the name, type, category, parent, and active start and end dates.
+
+Question fields include the name, text, options, and response type. The source describes question text in English and Danish where available.
+
+## Action activity
+
+Engagement item fields describe which items were shown or clicked. They include counts, identifiers, names, CTA URLs, and last activity timestamps.
+
+Microform fields describe whether a form was shown, submitted, or skipped. They include counts, status, and the latest event time. Do not infer the presence of contact details from these activity fields.
+
+## Time fields
+
+- `Reply Question Created At` records when the answer row was created.
+- `Reply Created At` records when the Reply was created.
+- Engagement item and Microform timestamps record their associated activity.
+- `Finished?` indicates whether the Reply was completed.
+
+## Calculate measures
+
+| Measure | Approach |
+| --- | --- |
+| Answer count | Count answer rows, using `Reply Question ID` as the key. |
+| Reply count | Count distinct `Reply ID` values. |
+| Replies by source | Group by `Source`, then count distinct `Reply ID` values. |
+| Comment count | Count answer rows with a non-empty `Comment`. |
+| Average prediction score | Average non-null `Prediction score` values. |
+| Weekly and monthly reporting | Group the relevant timestamp by ISO week or calendar month. |
+
+The source also suggests a 0–10 score calculated as `AVG(answer_value_0_100) / 10`. That field is not listed in its export dictionary. Confirm the field mapping and scale before you use this formula. Do not apply it directly to `Reply value` without confirmation.
+
+## Reporting hierarchies
+
+- Organization → parent Organization → grandparent Organization.
+- Driver or theme → question.
+- Year → quarter → month → week → day.
+
+Use the [data dictionary](/exports/data-dictionary) to check field names and types before you create your model.

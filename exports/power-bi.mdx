@@ -1,0 +1,64 @@
+---
+title: "Power BI and Microsoft Fabric"
+description: "Connect the StudentPulse export feed to Power BI and schedule a refresh in Fabric."
+---
+
+Use Power BI to analyze feedback and combine it with your institution's data. The source guide uses the Power BI **Web** connector to read your Organization's export URL.
+
+## Prerequisites
+
+- Access to the target Organization's export settings in StudentPulse.
+- Power BI Desktop.
+- Access to the Microsoft Fabric workspace where you will publish the report.
+
+<Note>
+  Menu names follow the November 2025 source guide. Your StudentPulse or Microsoft interface can differ.
+</Note>
+
+## Enable the export
+
+1. Select the target Organization in StudentPulse.
+2. Open **Settings**, then **Feedback Visualization**.
+3. Find **Other** and enable **External data export**.
+4. Copy the export URL from the field that appears.
+
+Treat this URL as confidential. The first feed is prepared after the next nightly export run.
+
+## Load the feed in Power BI Desktop
+
+1. Open Power BI Desktop.
+2. Select **Home → Get Data → Other → Web**.
+3. Paste the export URL.
+4. Configure the data source credentials. The source guide specifies **Anonymous** for the supplied export URL.
+5. Select **Connect**.
+6. Review the table preview.
+7. Select **Transform Data** if you need to change the data before loading it.
+8. Select **Load**.
+
+The Anonymous credential setting applies to the connector. It does not mean you should share the export URL publicly.
+
+## Publish your report
+
+1. In Power BI Desktop, select **Home → Publish**.
+2. Sign in with your Microsoft account when prompted.
+3. Publish to the intended workspace.
+
+## Schedule the refresh in Fabric
+
+1. Open [Microsoft Fabric](https://app.fabric.microsoft.com/).
+2. Open the workspace where you published the report.
+3. Select the **Semantic model** associated with the report.
+4. Select **Refresh → Schedule Refresh**.
+5. Set the refresh frequency and time.
+
+The source guide specifies a StudentPulse export update at **02:00 UTC**. Schedule the Power BI refresh after **03:00 UTC**, and confirm the current export schedule with StudentPulse.
+
+## Check the result
+
+- Confirm that the report uses the intended Organization's feed.
+- Confirm that the first nightly export has finished.
+- Use `Reply Question ID` as the answer key.
+- Count distinct `Reply ID` values when you need the number of Replies.
+- Check your joins against the [data model](/exports/data-model).
+
+If you see old data, check both the StudentPulse export timing and the Fabric refresh history.

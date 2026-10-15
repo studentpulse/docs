@@ -5,3 +5,8 @@
 # Draft content
 drafts/
 *.draft.mdx
+
+# Repository instructions and local skill metadata
+AGENTS.md
+LICENSE
+skills-lock.json

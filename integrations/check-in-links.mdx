@@ -1,0 +1,66 @@
+---
+title: "Check-in links"
+description: "Pass segmentation context from your institution's system into a Check-in URL."
+---
+
+A Check-in link can include context such as course, study mode, campus, and semester. Your institution's learning or student information system can generate these links.
+
+Use this method to select Check-in content or attach reporting context without asking students to enter that context in the Check-in.
+
+## Prerequisites
+
+- A Check-in URL from StudentPulse.
+- The segmentation IDs, locale codes, and option values agreed with StudentPulse.
+- A source system that can build and encode a URL.
+
+## How it works
+
+1. Your system adds the agreed parameters to the Check-in URL.
+2. A student opens the link.
+3. StudentPulse reads the parameters and applies the Check-in context.
+4. The Reply keeps the context for reporting.
+
+## URL format
+
+```text
+https://app.studentpulse.io/feedback/CHECK_IN_UUID?source=core_segmentation&segments[]=SEGMENT_ID_LOCALE_OPTION
+```
+
+Replace `CHECK_IN_UUID` with your Check-in identifier. Each `segments[]` value contains three parts:
+
+| Part | Meaning | Example |
+| --- | --- | --- |
+| `SEGMENT_ID` | The configured segmentation ID | `2010` |
+| `LOCALE` | The locale code for the option | `en` |
+| `OPTION` | The segmentation option value | `Mathematics 101` |
+
+Separate these parts with underscores. For example, `2010_en_Mathematics 101` becomes `2010_en_Mathematics+101` when spaces are encoded as `+`.
+
+Use a separate `segments[]` parameter for each value. Encode parameter values with your platform's URL tools.
+
+## Example
+
+This example adds course, study mode, campus, and semester context. The IDs are illustrative. Replace them with your own configuration.
+
+```text
+https://app.studentpulse.io/feedback/CHECK_IN_UUID?source=core_segmentation&segments%5B%5D=2010_en_Business+Administration+%28BBA%29&segments%5B%5D=2011_en_Full+Time&segments%5B%5D=2012_en_CPH&segments%5B%5D=2013_en_1st+semester
+```
+
+| Parameter value | Context |
+| --- | --- |
+| `2010_en_Business Administration (BBA)` | Course |
+| `2011_en_Full Time` | Study mode |
+| `2012_en_CPH` | Campus |
+| `2013_en_1st semester` | Semester |
+
+The source document uses `core` for a standard link and `core_segmentation` for this example. Confirm the required `source` value for your setup.
+
+## Use context in reports
+
+Agree the mapping with StudentPulse before you generate links. Do not assume that arbitrary query parameters become export fields.
+
+Ask StudentPulse to confirm any additional identifier that you need to join Replies to institution data. See [data exports](/exports/overview).
+
+<Warning>
+  Do not put names, email addresses, phone numbers, API keys, or other sensitive values in a Check-in URL. URLs can appear in browser history and logs. Confirm the handling of any student identifier before you use it.
+</Warning>
