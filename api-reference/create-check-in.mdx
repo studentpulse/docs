@@ -1,0 +1,53 @@
+---
+title: "Create a Check-in"
+description: "Draft request fields and response for creating a Check-in or a round."
+tag: "Draft"
+---
+
+The source describes creating a parent Check-in, then using its returned ID as `parent_id` when you create rounds.
+
+<Warning>
+  Confirm this draft contract with StudentPulse before use. See the [API overview](/api-reference/overview) for authentication and unresolved details.
+</Warning>
+
+## Endpoint
+
+```http
+POST https://api.studentpulse.io/v1/checkin/create
+```
+
+## Request fields
+
+| Field | Source type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | String | Yes | The display name of the Check-in or round. |
+| `category_id` | Integer | Yes | The template containing the questions and follow-up content. |
+| `parent_id` | Integer | No | The parent Check-in ID when you create a round. |
+| `start_date` | Date, `dd-mm-yyyy` | No | The start date of the Check-in or round. |
+| `end_date` | Date, `dd-mm-yyyy` | No | The end date of the Check-in or round. |
+| `student_count` | Integer | No | The number of students used to calculate the response rate. |
+| `placeholders` | Array | No | Replacement variables, such as `%COURSE_NAME%` mapped to `Atomic Physics`. Confirm the JSON structure. |
+
+## Minimal request body
+
+Values below are illustrative. Use a template ID supplied for your Organization.
+
+```json
+{
+  "name": "Course feedback",
+  "category_id": 12
+}
+```
+
+## Example response
+
+The source labels this response `200 OK`.
+
+```json
+{
+  "status": "success",
+  "feedback_id": 123
+}
+```
+
+Use the returned `feedback_id` as the parent reference when you create a round, subject to confirmation of the current API contract.

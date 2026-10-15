@@ -1,0 +1,65 @@
+---
+title: "Export data dictionary"
+description: "Field names, types, and examples from the StudentPulse V1.5 export guide."
+---
+
+The table below preserves the field names from the source documentation. Use these names when you map the feed to your reporting model.
+
+<Note>
+  Field types and examples describe the November 2025 source. Confirm them against your Organization's current export. Examples are illustrative; they are not a formal schema or a complete list of allowed values.
+</Note>
+
+| Field | Description | Type | Example |
+| :---- | :---- | :---- | :---- |
+| Reply Question ID | Unique id for this answer row (links one reply to one question) | Integer | 14592377 |
+| Reply Question Created At | When this answer row was created | Timestamp | 2025-09-14 10:21 |
+| Reply ID | Submission/session id for the overall reply | Integer | 828331 |
+| Question ID | Identifier of the question that was answered | Integer | 4439 |
+| Question name | Short internal name for the question | Text | Q01\_Respect |
+| Question options | All selectable options for the question (if applicable) | Text/Array | 1–5 Likert |
+| Question Text EN | Question wording in English | Text | I feel safe at school. |
+| Question text DA | Question wording in Danish | Text | Jeg føler mig tryg i skolen. |
+| Microform name | Name of the follow-up microform (if any) | Text | Support request |
+| Driver ID | Driver/theme id the question belongs to | Integer | 31 |
+| Driver Name DA | Driver/theme name (Danish) | Text | Trivsel |
+| Reply value | Numeric answer value | Number | 4 |
+| Comment | Student's written comment if provided | Text | More feedback on homework |
+| Prediction score | Model score assessed on the comment (if present) | Number | 0.74 |
+| Reply Created At | When the overall reply was created | Timestamp | 2025-09-14 10:18 |
+| Finished? | Whether the reply was completed | Boolean | 1 |
+| Source | How the reply started | Text/Enum | core |
+| Checkin ID | Identifier of the survey/checkin | Integer | 9112 |
+| Checkin name | Display name of the survey/checkin | Text | Q2 Wellbeing |
+| Category ID | Category of the checkin (if used) | Integer | 12 |
+| Checkin Type | Type/kind of survey | Text | pulse |
+| Parent checkin ID | Parent survey id (if hierarchical) | Integer | 9000 |
+| Parent checkin name | Parent survey name | Text | 2025 Wellbeing Programme |
+| Checkin start date | Scheduled start date/time for the checkin | Date/Timestamp | 2025-09-01 |
+| Checkin end date | Scheduled end date/time for the checkin | Date/Timestamp | 2025-09-30 |
+| Organization ID | Organization the reply belongs to | Integer | 331 |
+| Organization name | Organization display name | Text | North Secondary |
+| Parent organization ID | Parent org id | Integer | 77 |
+| Parent organization name | Parent org name | Text | North District |
+| Grandparent organization ID | Grandparent org id | Integer | 7 |
+| Grandparent organization name | Grandparent org name | Text | Region North |
+| Engagement items triggered count | How many engagement items were shown for this answer | Integer | 2 |
+| Engagement Items clicked count | How many engagement items were clicked | Integer | 1 |
+| Engagement items triggered? | Whether any engagement item was triggered | Boolean | 1 |
+| Engagement items clicked? | Whether any engagement item was clicked | Boolean | 1 |
+| Engagement items IDs | IDs of the engagement items | Text/Array | 101\|104 |
+| Engagement item names | Names of the engagement items | Text/Array | Study tips\|Ask a mentor |
+| Engagement item CTA URLs | CTA URLs for the items | Text/Array | https\://…\|https\://… |
+| Engagement item last triggered at | Most recent time an item was triggered for this answer | Timestamp | 2025-09-14 10:22 |
+| Engagement item last clicked at | Most recent time an item was clicked for this answer | Timestamp | 2025-09-14 10:23 |
+| Microform targeted count | How many times the microform was targeted/shown | Integer | 1 |
+| Microform submitted count | Count of microform submissions | Integer | 1 |
+| Microform skipped count | Count of skips of the microform step | Integer | 0 |
+| How many people left at microform step? | Number of people who left during the microform | Integer | 0 |
+| Microform status | Current microform status for this answer | Text/Enum | targeted |
+| Microform last time | Most recent timestamp for any microform event | Timestamp | 2025-09-14 10:24 |
+| Question Type | The question’s response format | Text/Enum | likert\_1\_5 |
+| Selected option text | Label of the chosen option (if option-based) | Text | Agree |
+
+Array examples use a pipe character between values. Confirm the actual serialization in your feed before you split these fields.
+
+See the [data model](/exports/data-model) for relationships, keys, and measures.

@@ -1,0 +1,50 @@
+---
+title: "Data exports"
+description: "Read Organization feedback data for analysis in your reporting tools."
+---
+
+StudentPulse provides an Organization-specific, read-only export URL. Reporting tools can read the feed and combine the feedback data with institution data.
+
+The feed contains one row per answer to a question. A row can also include a comment and the associated action activity.
+
+## What the feed contains
+
+- Reply and answer identifiers.
+- Question text, response options, type, and Driver metadata.
+- Check-in details and its active dates.
+- Organization, parent Organization, and grandparent Organization.
+- Engagement item and Microform activity.
+- Creation and activity timestamps.
+
+See the [data dictionary](/exports/data-dictionary) for the source field names and examples.
+
+## Data flow
+
+| Stage | What happens |
+| --- | --- |
+| Collection | A student submits answers through a Check-in. |
+| Export | StudentPulse prepares the reporting feed for the Organization. |
+| Import | Your reporting tool reads the export URL. |
+| Reporting | You transform, model, and analyze the data in your workspace. |
+
+## Refresh timing
+
+The source documentation specifies a nightly export update at **02:00 UTC**. It recommends a reporting refresh after **03:00 UTC**.
+
+The first export is available after the next nightly run. Allow for the initial processing of historical data.
+
+<Note>
+  Confirm the current export schedule with StudentPulse. This timing comes from the November 2025 documentation and is not a service guarantee.
+</Note>
+
+## Join institution data
+
+Use agreed course, program, or Organization identifiers to join feedback data to your own data. StudentPulse can discuss an additional identifier for your setup.
+
+Do not assume that a student identifier is part of the standard export. Confirm the available fields and permitted use with StudentPulse.
+
+## Set up a reporting tool
+
+Follow the [Power BI and Fabric guide](/exports/power-bi) to enable the export and connect a report. Use the [data model](/exports/data-model) to choose keys and avoid counting the same Reply more than once.
+
+Treat the export URL as confidential. Share it only with people and systems that should have access to the feed.

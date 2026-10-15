@@ -1,47 +1,36 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Plan your integration"
+description: "Choose a connection method and prepare the information needed for setup."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
+Choose the method that matches your task. Check-in links pass context into StudentPulse. Data exports send feedback data to your reporting tools.
 
 ## Prerequisites
 
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
+- Access to the target Organization in StudentPulse.
+- A description of the data you need to send or receive.
+- A contact who can configure your institution's source system or reporting tool.
 
 ## Get started
 
-<Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+| Your task | Method | What to prepare |
+| --- | --- | --- |
+| Add context before a student opens a Check-in | [URL parameters](/integrations/check-in-links) | A Check-in URL and the agreed segmentation keys and values |
+| Analyze feedback with institution data | [Data export](/exports/overview) | Export access for the target Organization and an agreed data mapping |
+| Build a Power BI report | [Power BI and Fabric](/exports/power-bi) | Power BI Desktop, an export URL, and access to a Fabric workspace |
+| Manage Check-ins from another system | [Draft API reference](/api-reference/overview) | An API key and confirmation of the current API contract |
 
-    ```bash
-    npm install your-package
-    ```
-  </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+## Confirm the data mapping
 
-    ```bash
-    your-cli init
-    ```
-  </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
+For Check-in links, agree which values represent a course, campus, semester, or other reporting category. Your source system can then generate the links.
 
-    ```bash
-    your-cli start
-    ```
-  </Step>
-</Steps>
+For exports, agree which identifiers connect the feedback data to your institution's data. Ask StudentPulse about any additional identifier you need.
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+## Test with example data
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+1. Use a test Check-in and synthetic data.
+2. Open a generated link and confirm the intended Check-in context.
+3. Submit a test Reply.
+4. After the export refresh, confirm that your reporting tool receives the expected context.
+
+Use your StudentPulse contact to confirm support for integrations that are not described here, including Group synchronization and student identification through UniLogin or Aula.
