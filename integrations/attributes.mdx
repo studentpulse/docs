@@ -1,0 +1,68 @@
+---
+title: "Attributes"
+description: "Describe Groups, Participants, and Replies with reusable categories and values."
+---
+
+An Attribute is a data point used to describe a student or their context. Examples include campus, term, programme, and study year.
+
+Each Attribute value has a stable StudentPulse ID, a category key, and a label. The label can have translations. Several values can share a key.
+
+| Category key | Example label | Meaning |
+| --- | --- | --- |
+| `campus` | North | A campus value. |
+| `term` | 2026/27 | An academic term. |
+| `programme_name` | Biology | A programme name. |
+| `student_study_year` | 1 | A study year. |
+
+The category is `campus`. The value is `North`. Another value, `South`, belongs to the same category.
+
+## How Attributes relate to other records
+
+| Record | How you use Attributes |
+| --- | --- |
+| [Group](/integrations/groups) | Describe a class or course. Its Attributes are added when its Check-in link resolves. |
+| [Participant](/integrations/participants) | Save values directly on an individual record. A Participant can have Attributes without a Group. |
+| Reply | Keep the context collected when the student answers a Check-in. A Reply can have Attributes without Group context. |
+
+An Attribute is not a Group or a Check-in assignment. A campus value alone does not select a unique class.
+
+Participant memberships and Reply Attributes are separate records. Do not assume that a Participant edit rewrites past Replies. Do not assume that a Participant's saved Attributes appear in every Reply without a configured collection flow.
+
+## Names and source IDs
+
+StudentPulse pairs these name categories with source-system IDs:
+
+| Name key | Identifying key |
+| --- | --- |
+| `course_name` | `course_id` |
+| `class_name` | `class_id` |
+| `programme_name` | `programme_id` |
+| `module_name` | `module_id` |
+
+Keep source IDs stable when labels change. The external ID attached to an Attribute value is different from its StudentPulse ID. It is also different from the external Group ID.
+
+Broad categories include `term`, `level`, `student_study_year`, `student_semester`, `study_type`, `faculty`, `department`, `campus`, and `other`. Several Groups can share each value.
+
+## Incoming institution context
+
+A configured integration can supply a map such as:
+
+```json
+{
+  "class_id": "BIO-1A-2026",
+  "campus": "North",
+  "term": "2026/27"
+}
+```
+
+This example describes the data mapping. It is not a public request endpoint. Agree the entry flow with StudentPulse.
+
+Recognized values support Group matching and Reply context. Unknown keys are ignored. A recognized value that is not yet stored can be added to the Reply context. This does not create a Group or attach the value to a Group.
+
+## Choose values for Participant imports
+
+The Participant CSV uses existing Attribute labels. It does not use category keys or external IDs. Separate several labels with semicolons.
+
+The import matches labels across stored languages without case sensitivity. Each label must identify one existing value. If two Attributes share a label, the import reports an ambiguous match. Unknown labels also block the import.
+
+See [Participants](/integrations/participants) for the CSV format. Attribute availability in dashboard filters depends on your access and the screen.

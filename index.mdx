@@ -3,17 +3,33 @@ title: "StudentPulse integrations"
 description: "Connect Check-ins to your institution's systems and export feedback for reporting."
 ---
 
-StudentPulse collects student feedback through Check-ins. You can add institution context to Check-in links and use exported answers in your reporting tools.
+StudentPulse collects student feedback through Check-ins. You can organize collection with Groups, add context with Attributes, and manage individual records with Participants. Data exports send feedback to your reporting tools.
 
-<Note>
-  These guides are based on the StudentPulse V1.5 documentation from November 2025. Confirm setup details with StudentPulse before you use them in production. The API reference is a draft.
-</Note>
+## Understand the records
 
-## Choose an integration
+| Concept | Purpose | Example |
+| --- | --- | --- |
+| [Group](/integrations/groups) | A real unit with a permanent Check-in link. | Biology 1A. |
+| [Attribute](/integrations/attributes) | A category and value used as context. | Campus: North. |
+| [Participant](/integrations/participants) | An individual contact record with memberships. | A student assigned to Biology 1A. |
+| Reply | The answers submitted in one Check-in session. | A student's completed feedback. |
+
+A Group can have many Participants and Attributes. A Participant can belong to several Groups. Reply context records the values collected with the feedback.
+
+## Choose a guide
 
 <Columns cols={2}>
+  <Card title="Groups" icon="users" href="/integrations/groups">
+    Prepare Group data and use permanent Check-in links.
+  </Card>
+  <Card title="Attributes" icon="tags" href="/integrations/attributes">
+    Map categories, labels, and source-system IDs.
+  </Card>
+  <Card title="Participants" icon="user" href="/integrations/participants">
+    Add contact records and import Group and Attribute memberships.
+  </Card>
   <Card title="Check-in links" icon="link" href="/integrations/check-in-links">
-    Pass course, campus, and semester context through a Check-in URL.
+    Choose a Group link or pass agreed context to a direct Check-in link.
   </Card>
   <Card title="Data exports" icon="database" href="/exports/overview">
     Read feedback data for analysis in your institution's reporting tools.
@@ -21,13 +37,6 @@ StudentPulse collects student feedback through Check-ins. You can add institutio
   <Card title="Power BI and Fabric" icon="chart-column" href="/exports/power-bi">
     Connect an export feed and schedule report refreshes.
   </Card>
-  <Card title="Check-in API" icon="code" href="/api-reference/overview">
-    Review the draft API for creating, reading, deleting, and distributing Check-ins.
-  </Card>
 </Columns>
 
-## Plan your setup
-
-Start with the [integration quickstart](/quickstart). It lists the information you need before you connect a system.
-
-The [data model](/exports/data-model) explains the relationship between answers, Replies, questions, and Check-ins. The [data dictionary](/exports/data-dictionary) describes the export fields.
+Start with [Plan your integration](/quickstart) to prepare your setup. The [export data model](/exports/data-model) explains answers and Replies. The [data dictionary](/exports/data-dictionary) lists export fields.

@@ -15,10 +15,12 @@ Choose the method that matches your task. Check-in links pass context into Stude
 
 | Your task | Method | What to prepare |
 | --- | --- | --- |
+| Route students to the active Check-in for their unit | [Groups](/integrations/groups) | Stable Group IDs, Group data, and Check-in assignments |
+| Describe students and their study context | [Attributes](/integrations/attributes) | Category keys, labels, and source IDs |
+| Add individual contact records and memberships | [Participants](/integrations/participants) | Administrator access and a validated Participant CSV |
 | Add context before a student opens a Check-in | [URL parameters](/integrations/check-in-links) | A Check-in URL and the agreed segmentation keys and values |
 | Analyze feedback with institution data | [Data export](/exports/overview) | Export access for the target Organization and an agreed data mapping |
 | Build a Power BI report | [Power BI and Fabric](/exports/power-bi) | Power BI Desktop, an export URL, and access to a Fabric workspace |
-| Manage Check-ins from another system | [Draft API reference](/api-reference/overview) | An API key and confirmation of the current API contract |
 
 ## Confirm the data mapping
 
@@ -33,4 +35,6 @@ For exports, agree which identifiers connect the feedback data to your instituti
 3. Submit a test Reply.
 4. After the export refresh, confirm that your reporting tool receives the expected context.
 
-Use your StudentPulse contact to confirm support for integrations that are not described here, including Group synchronization and student identification through UniLogin or Aula.
+Group and Participant imports are separate operations. Prepare existing Groups and Attribute values before importing Participant memberships.
+
+For a source-system login flow, agree how student context reaches StudentPulse. A permanent Group link does not require a Participant record. Confirm the configured entry flow with your StudentPulse contact.

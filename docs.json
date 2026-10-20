@@ -19,6 +19,9 @@
       {
         "group": "Integrations",
         "pages": [
+          "integrations/groups",
+          "integrations/attributes",
+          "integrations/participants",
           "integrations/check-in-links"
         ]
       },
@@ -29,16 +32,6 @@
           "exports/power-bi",
           "exports/data-model",
           "exports/data-dictionary"
-        ]
-      },
-      {
-        "group": "API reference",
-        "pages": [
-          "api-reference/overview",
-          "api-reference/create-check-in",
-          "api-reference/get-check-in",
-          "api-reference/delete-check-in",
-          "api-reference/distribute-check-in"
         ]
       }
     ]
@@ -68,5 +61,32 @@
       "vscode"
     ]
   },
-  "description": "Integration guides, reporting exports, and draft API reference for StudentPulse."
+  "description": "Integration guides for Groups, Attributes, Participants, Check-in links, and reporting exports.",
+  "redirects": [
+    {
+      "source": "/api-reference/overview",
+      "destination": "/quickstart",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/create-check-in",
+      "destination": "/quickstart",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/get-check-in",
+      "destination": "/quickstart",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/delete-check-in",
+      "destination": "/quickstart",
+      "permanent": true
+    },
+    {
+      "source": "/api-reference/distribute-check-in",
+      "destination": "/quickstart",
+      "permanent": true
+    }
+  ]
 }
