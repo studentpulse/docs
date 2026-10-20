@@ -43,6 +43,31 @@ Keep source IDs stable when labels change. The external ID attached to an Attrib
 
 Broad categories include `term`, `level`, `student_study_year`, `student_semester`, `study_type`, `faculty`, `department`, `campus`, and `other`. Several Groups can share each value.
 
+## Attribute CSV example
+
+Use the Attribute import to create or update reusable values. Save this example as a UTF-8 `.csv` file:
+
+```csv
+Attribute category*,Attribute value*,Attribute ID
+Campus,North,
+Campus,South,
+Term,2026/27,
+Programme name,Biology,BIO
+Class name,Biology 1A,BIO-1A-2026
+```
+
+Keep all three headers in this order. The asterisks in `Attribute category*` and `Attribute value*` are part of the required headers. Include the `Attribute ID` header even when its cells are empty.
+
+| Column | Meaning |
+| --- | --- |
+| `Attribute category*` | The category name. Spaces become underscores in the stored key. `Programme name` becomes `programme_name`. |
+| `Attribute value*` | The value label, stored in the Organization's default language. |
+| `Attribute ID` | An optional external source-system ID. It is not the StudentPulse Attribute ID. |
+
+Use one row per value. Keep external IDs stable when you rename values. With an external ID, the import matches within the category by that ID. Without one, it matches the value label within the category. Review the proposed changes and any matching errors before you confirm the import.
+
+This file creates Attribute values. It does not assign them to Groups or Participants. Use the [Group CSV](/integrations/groups#group-csv-example) or [Participant CSV](/integrations/participants#import-from-csv) for those assignments.
+
 ## Incoming institution context
 
 A configured integration can supply a map such as:

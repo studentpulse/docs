@@ -48,6 +48,21 @@ Use the current Group CSV template from StudentPulse. Keep its column order. Pre
 
 Group imports and Participant imports use different templates. Importing Group data does not import student email addresses or phone numbers. Assign Check-ins after you prepare the Groups.
 
+## Group CSV example
+
+This example imports one class with its term, programme, campus, student count, and dates. Save the text as a UTF-8 `.csv` file. Keep all columns, including the empty cells.
+
+```csv
+Group ID *,Group Name *,Group Type,Term *,Course name,Course ID,Class ID,Class name,Module ID,Module Name,Programme name,Programme ID,Level,Student study year,Student semester,Study type,Department,Campus,Faculty,Number of students,Other,Start Date *,End date *,Users,Distributors,Actors
+BIO-1A-2026,Biology 1A,Class,2026/27,,,BIO-1A-2026,Biology 1A,,,Biology,BIO,1,1,1,Full time,Science,North,Science,28,,01/08/2026,31/07/2027,,,
+```
+
+`Group ID *` is the external Group ID. `Class ID` is the external ID for the `class_name` Attribute. They have the same value in this example, but they are separate fields. `Programme ID` identifies the programme Attribute.
+
+`Users`, `Distributors`, and `Actors` refer to staff email addresses. They do not import Participants. The example leaves these cells empty. For several staff addresses in one cell, separate them with commas and put the cell in double quotes.
+
+Use `DD/MM/YYYY` for dates. Review the import changes before you confirm them. Assign a Check-in to the Group after import.
+
 ## Match students to Groups
 
 For a configured institution integration, your system supplies the student's Attribute values after login in your own system.
