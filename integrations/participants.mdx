@@ -1,0 +1,78 @@
+---
+title: "Participants"
+description: "Manage individual contact records, Group memberships, Attributes, and CSV imports."
+---
+
+A Participant is an individual record in an Organization. It has a stable Participant UUID, an optional type, and optional [Group](/integrations/groups) and [Attribute](/integrations/attributes) memberships.
+
+Email addresses and phone numbers are stored in a separate contact service. The main StudentPulse application stores the Participant UUID and memberships. Contact details stay hidden until an authorized user reveals them.
+
+A Participant is different from a Reply. Creating a Participant does not submit feedback. A Group's student count does not create Participants. Do not assume that a Participant UUID is the student identifier in an export or Check-in link.
+
+## Before you start
+
+Use an administrator account for the target parent Organization. Enable Participants for that Organization when prompted. Create the Groups and Attribute values that you plan to assign.
+
+## Add a Participant
+
+1. Open **Participants** for the target Organization.
+2. Open **Add**, then select **Add manually**.
+3. Enter an email address, a phone number, or both.
+4. Set the optional type and choose existing Groups and Attributes.
+5. Save the Participant.
+
+A Participant can belong to several Groups. You can select Groups and Attributes independently. Removing a Group membership keeps the Participant's Attribute assignments. Removing an Attribute keeps Group membership.
+
+## Import from CSV
+
+Open **Add**, then select **Import from CSV**. Use UTF-8 encoding and one of these header formats:
+
+```csv
+Email,Phone
+student@example.org,
+```
+
+```csv
+Email,Phone,Type,Groups,Attributes
+student@example.org,,Student,Biology 1A;Chemistry 1A,North;2026/27
+```
+
+The examples assume that the named Groups and Attribute values already exist. They use synthetic contact data.
+
+| Column | Rule |
+| --- | --- |
+| Email | Supply an email address, a phone number, or both. |
+| Phone | Contact validation checks the number before import. |
+| Type | Optional text, up to 255 characters. |
+| Groups | Existing Group names, separated by semicolons. |
+| Attributes | Existing Attribute labels, separated by semicolons. |
+
+Headers are case-insensitive. Keep the column order shown above. Leave an optional cell empty when you do not need it.
+
+Group names and Attribute labels are trimmed and matched without case sensitivity. Attribute labels can match any stored language. Unknown or ambiguous values block the import. Archived or deleted Groups and Attributes cannot be new assignments.
+
+## Review and import
+
+1. Upload the CSV file.
+2. Review errors by CSV row and field.
+3. Correct all errors and upload the file again.
+4. Select **Import** after validation passes.
+5. Check the created count and refresh the Participant list when you close the result.
+
+Validation does not create Participants. Import creates one Participant at a time. It stops at the first failed row. Records already created remain saved. Check the result before submitting the remaining rows again. If the result of a creation is uncertain, contact your administrator before retrying.
+
+## Manage memberships in bulk
+
+Select Participants and open the Group or Attribute action in the selection toolbar. The picker starts with the combined values from your selection.
+
+Saving applies the exact checked set to every selected Participant. It replaces that membership type. Clearing every checkbox removes all memberships of that type. It keeps the other membership type.
+
+## Search, reveal, archive, and delete
+
+Search by email address or phone number. You can also filter the list by saved Groups and Attributes. Several selected Groups match any of those Groups. Several selected Attributes match any of those values. When both filters are set, a Participant must match both lists.
+
+Reveal contact details only when you need them. Use Edit to change the Participant's type or memberships. Reveal the contacts before editing email or phone.
+
+Archive a Participant to move the record out of the active list. You can restore an archived Participant. Contact search applies to active Participants.
+
+Permanent deletion is available for archived Participants. It removes their contact data and membership links. A later recreation receives a new UUID. Deletion does not provide a way to restore the removed record.

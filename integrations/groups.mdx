@@ -1,0 +1,76 @@
+---
+title: "Groups"
+description: "Use Groups to organize students and route permanent links to the correct Check-in."
+---
+
+A Group is a real unit in your Organization. It can be a class, course, programme, or department. A Group has its own name, type, external ID, and permanent link.
+
+Use a Group to decide which Check-in students can open. Use [Attributes](/integrations/attributes) to describe the Group and compare feedback. Use [Participants](/integrations/participants) to manage individual contact records and memberships.
+
+## Example
+
+| Record | Example | Purpose |
+| --- | --- | --- |
+| Group | Biology 1A | The class that receives a Check-in. |
+| Group type | Class | The kind of unit. |
+| External Group ID | BIO-1A-2026 | The source system's stable reference for this Group. |
+| Attribute | Campus: North | Context shared with other Groups. |
+| Participant | A student assigned to Biology 1A | An individual record with contact details stored separately. |
+
+A Group's student count is a reporting value. It does not create Participant records.
+
+## Permanent Group links
+
+A Group link uses this format:
+
+```text
+https://app.studentpulse.io/v2/g/GROUP_SLUG
+```
+
+Copy the generated link from StudentPulse. The slug is a generated identifier. It is not the Group name or the external Group ID.
+
+When a student opens the link, StudentPulse finds the assigned Check-in for the current date. The link stays the same when the active Check-in changes. The Group's Attributes travel with the resolved link.
+
+A Group can have several Check-ins over time. Their active dates must not overlap. An always-active Single Check-in cannot share the Group with another assignment.
+
+If no Check-in is active, StudentPulse can show a journey introduction when one is available. It does not open an unrelated active Check-in.
+
+## Prepare Group imports
+
+Use the current Group CSV template from StudentPulse. Keep its column order. Prepare:
+
+- A stable Group ID and a Group name.
+- A Group type, such as Class or Course.
+- Relevant Attribute values, such as term, campus, and programme.
+- External course, class, programme, or module IDs where your source system provides them.
+- Start and end dates in `DD/MM/YYYY` format, where needed.
+- The student count and staff assignments, where needed.
+
+Group imports and Participant imports use different templates. Importing Group data does not import student email addresses or phone numbers. Assign Check-ins after you prepare the Groups.
+
+## Group CSV example
+
+This example imports one class with its term, programme, campus, student count, and dates. Save the text as a UTF-8 `.csv` file. Keep all columns, including the empty cells.
+
+```csv
+Group ID *,Group Name *,Group Type,Term *,Course name,Course ID,Class ID,Class name,Module ID,Module Name,Programme name,Programme ID,Level,Student study year,Student semester,Study type,Department,Campus,Faculty,Number of students,Other,Start Date *,End date *,Users,Distributors,Actors
+BIO-1A-2026,Biology 1A,Class,2026/27,,,BIO-1A-2026,Biology 1A,,,Biology,BIO,1,1,1,Full time,Science,North,Science,28,,01/08/2026,31/07/2027,,,
+```
+
+`Group ID *` is the external Group ID. `Class ID` is the external ID for the `class_name` Attribute. They have the same value in this example, but they are separate fields. `Programme ID` identifies the programme Attribute.
+
+`Users`, `Distributors`, and `Actors` refer to staff email addresses. They do not import Participants. The example leaves these cells empty. For several staff addresses in one cell, separate them with commas and put the cell in double quotes.
+
+Use `DD/MM/YYYY` for dates. Review the import changes before you confirm them. Assign a Check-in to the Group after import.
+
+## Match students to Groups
+
+For a configured institution integration, your system supplies the student's Attribute values after login in your own system.
+
+StudentPulse uses `course_id`, `class_id`, `programme_id`, and `module_id` as identifying Attributes. These IDs can distinguish units that share a campus or name. When an identifying Attribute is present, broad values such as campus do not narrow the match.
+
+Without an identifying Attribute, StudentPulse can match broad Attributes. Several matches can be valid. A student can belong to several courses. StudentPulse returns the matching Groups rather than choosing one by rank.
+
+This matching process does not create Groups. Configure a fallback Group and assign it a Check-in for arrivals with no match. Unmatched arrivals help an administrator find missing Group data. Import or create the missing Group through normal Group management.
+
+See [Check-in links](/integrations/check-in-links) for the difference between a permanent Group link and a direct Check-in link.

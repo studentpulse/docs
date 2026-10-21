@@ -7,6 +7,20 @@ A Check-in link can include context such as course, study mode, campus, and seme
 
 Use this method to select Check-in content or attach reporting context without asking students to enter that context in the Check-in.
 
+## Choose the link type
+
+Use a [permanent Group link](/integrations/groups) when the same class or course needs the correct Check-in over time:
+
+```text
+https://app.studentpulse.io/v2/g/GROUP_SLUG
+```
+
+StudentPulse resolves the assigned Check-in and adds the Group's Attributes. Copy this link from StudentPulse.
+
+Use a direct Check-in link when you need one specific Check-in. Generated links can use `/check-in/CHECK_IN_UUID/intro` or `/feedback/CHECK_IN_UUID`, depending on the Organization's configuration. Keep the generated route.
+
+Direct links can carry [Attribute](/integrations/attributes) context. They do not create [Participants](/integrations/participants) or save Participant memberships.
+
 ## Prerequisites
 
 - A Check-in URL from StudentPulse.
@@ -20,13 +34,13 @@ Use this method to select Check-in content or attach reporting context without a
 3. StudentPulse reads the parameters and applies the Check-in context.
 4. The Reply keeps the context for reporting.
 
-## URL format
+## Existing question context
 
 ```text
 https://app.studentpulse.io/feedback/CHECK_IN_UUID?source=core_segmentation&segments[]=SEGMENT_ID_LOCALE_OPTION
 ```
 
-Replace `CHECK_IN_UUID` with your Check-in identifier. Each `segments[]` value contains three parts:
+This format uses existing segmentation question IDs. It differs from the Attribute option format below. Replace `CHECK_IN_UUID` with your Check-in identifier. Each `segments[]` value contains three parts:
 
 | Part | Meaning | Example |
 | --- | --- | --- |
@@ -53,7 +67,21 @@ https://app.studentpulse.io/feedback/CHECK_IN_UUID?source=core_segmentation&segm
 | `2012_en_CPH` | Campus |
 | `2013_en_1st semester` | Semester |
 
-The source document uses `core` for a standard link and `core_segmentation` for this example. Confirm the required `source` value for your setup.
+Keep the source value supplied by your entry flow. The example above uses `core_segmentation`. Generated Group links use `integration` by default.
+
+## Attribute option context
+
+Current Attribute links use `o-OPTION_ID_LOCALE_LABEL` values in `segments[]`. The `o-` prefix identifies an Attribute option. `OPTION_ID` is its StudentPulse ID. It is not a Group ID or an external source-system ID.
+
+For example, a synthetic campus option could appear as:
+
+```text
+segments[]=o-33_en_north
+```
+
+Group link resolution builds these values from the Group's stored Attributes. Use generated links and agreed mappings rather than replacing the IDs yourself. Preserve a separate `segments[]` entry for each value.
+
+A configured institution integration can also receive a keyed Attribute payload. See [Attributes](/integrations/attributes) for keys and [Groups](/integrations/groups) for matching rules. A keyed payload is not a set of arbitrary URL parameters.
 
 ## Use context in reports
 
